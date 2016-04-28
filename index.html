@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Séance 3 : tableaux</title>
+  <title>Support de restructuration</title>
   <meta charset="utf-8">
-  <meta name="description" content="Séance 3 : tableaux">
+  <meta name="description" content="Support de restructuration">
   <meta name="author" content="Sylvain Tenier">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,9 +32,9 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1>Séance 3 : tableaux</h1>
-    <h2>questions de restructuration</h2>
-    <p>Sylvain Tenier<br/></p>
+    <h1>Support de restructuration</h1>
+    <h2>Réponse à vos questions</h2>
+    <p>Sylvain Tenier<br/>s.tenier@groupe-esigelec.fr</p>
   </hgroup>
   <article></article>  
 </slide>
@@ -54,7 +54,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="class" id="id" style="background:;">
+<slide class="" id="id" style="background:;">
   <hgroup>
     <h2>Structure itérative <em>for</em></h2>
   </hgroup>
@@ -156,6 +156,307 @@ for(int i=0;i&lt;2;i++){
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="title-slide" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 4</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Structures conditionnelles / itératives alternatives</li>
+<li>Retour sur les tableaux</li>
+<li>Les méthodes statiques</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Structures alternatives</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Conditions ternaires</p>
+
+<ul>
+<li>Méthode complexe !</li>
+<li>\(\mathtt{(x < y) ? y : x)}\)</li>
+</ul></li>
+<li><p>Itérations </p></li>
+</ul>
+
+<pre><code class="java">String tab[] = {&quot;toto&quot;, &quot;titi&quot;, &quot;tutu&quot;, &quot;tete&quot;, &quot;tata&quot;};
+for(String str : tab)
+  // à chaque itération, str prend la valeur suivante de tab 
+  System.out.println(str);
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Random</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Génération d&#39;un nombre dans l&#39;intervalle \(\mathbf{[min;max]} \)</li>
+</ul>
+
+<pre><code class="java">    public static void main(String[] args) {
+        int min=3; // valeur minimale de l&#39;intervale
+        int max=45; // valeur maximale de l&#39;intervale
+        while(true){
+            //tirage aléatoire
+            int n=(int)(Math.random()*(max-min+1))+min;
+            //affichage pour validation
+            if(n==min||n==max||n==(min-1)||n==(max+1))
+                System.out.println(n);
+        }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Classification</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Utilisation du modulo pour créer un nombre défini de classes à partir de n&#39;importe quel entier positif</li>
+</ul>
+
+<pre><code class="java">    public static void main(String[] args) {
+        int max=1545858; // valeur très grande
+        int nbClasses=4; // nombre de classes souhaitées
+        while(true){
+            //tirage aléatoire entre 1 et max
+            int n=(int)(Math.random()*(max))+1;
+            //affichage du résultat entre 1 et 4
+            System.out.println(&quot;classe :&quot;+((n%nbClasses)+1));
+        }
+    }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Création et appel de méthode statique</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Comment écrire une méthode et l&#39;appeler plusieurs fois ?</li>
+</ul>
+
+<pre><code class="java">    /** création d&#39;une méthode affichant le paramètre */
+    public static void afficherParametre(double valeur){
+        System.out.println(&quot;la valeur passée est :&quot; + valeur);
+    }
+
+    /** utilisation de la méthode depuis le main*/
+    public static void main(String[] args) {
+        double val1=3.2;
+        //appel avec la variable
+        afficherParametre(val1);
+        //appel avec une valeur 
+        afficherParametre(8.3);
+        //appel avec le résultat d&#39;un calcul
+        afficherParametre(val1+2);  
+    }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Recherche de méthodes existantes</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Dans votre code
+
+<ul>
+<li>Ecrire le début et \(\mathbf{Ctrl+Espace}\)</li>
+<li>Afficher la liste des méthodes (\(\mathbf{Ctrl+O}\))</li>
+<li>Rechercher par nom (\(\mathbf{Ctrl+H}\))</li>
+</ul></li>
+<li>Dans les librairies
+
+<ul>
+<li>Utiliser la javadoc !</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/">https://docs.oracle.com/javase/8/docs/api/</a></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Passage de tableaux en paramètres</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Deux tableaux de dimensions différentes ne sont pas du même type !</li>
+</ul>
+
+<pre><code class="java">  public static void utiliserTableau(int tab[]){
+        System.out.println(&quot;le premier élément du tableau est :&quot;+tab[0]);
+    }
+
+    public static void main(String[] args) {
+        int tab[]={1,2,3};
+        int tab2d[][]={ {1,2},{3,4},{5,6} };
+        utiliserTableau(tab);
+        //affiche 1
+        utiliserTableau(tab2d);
+        //The method utiliserTableau(int[]) in the type Essai is not 
+        //applicable for the arguments (int[][])
+    }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Solution : surcharge de méthode !</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>méthode avec <em>le même nom</em> mais des <em>paramètres différents</em></li>
+</ul>
+
+<pre><code class="java">    /** affichage du premier élément d&#39;un tableau 1D */
+    public static void utiliserTableau(int tab[]){
+        System.out.println(&quot;le premier élément du tableau est :&quot;+tab[0]);
+    }
+
+    /** affichage du premier élément d&#39;un tableau 2D */
+    public static void utiliserTableau(int tab[][]){
+        System.out.println(&quot;le premier élément du tableau est :&quot;+tab[0][0]);
+    }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Méthodes de la classe String (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>  charAt(int index)
+
+<ul>
+<li>renvoie les caractère situé à l&#39;indice \(\mathbf{index}\)</li>
+</ul></li>
+<li>substring(int beginIndex)
+
+<ul>
+<li>renvoie la sous-chaine à partir de \(\mathbf{beginIndex}\)</li>
+</ul></li>
+<li>substring(int beginIndex, int endIndex) (surcharge de la même méthode !)
+
+<ul>
+<li>renvoie la sous-chaine entre  \(\mathbf{beginIndex}\) et \(\mathbf{endIndex}\) (non inclus)</li>
+</ul></li>
+</ul>
+
+<pre><code class="java">String str=&quot;Bonjour&quot;;
+str.charAt(2); //renvoie &#39;n&#39;
+str.charAt(5); //renvoie &#39;u&#39;
+str.substring(2); //renvoie &quot;njour&quot;
+str.substring(2,5); //renvoie &quot;njo&quot;
+str.substring(2,12); //StringIndexOutOfBoundsException !
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Méthodes de la classe String (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>  lastIndexOf(int ch)
+
+<ul>
+<li>renvoie la dernière occurence du caractère \(\mathbf{ch}\) ou -1 si non trouvé</li>
+</ul></li>
+<li>lastIndexOf(String str)
+
+<ul>
+<li>renvoie la dernière occurence de la chaîne \(\mathbf{str}\) ou -1 si non trouvé</li>
+</ul></li>
+</ul>
+
+<pre><code class="java">  String str=&quot;Bonjour&quot;;
+  str.lastIndexOf(&#39;r&#39;) //renvoie 6
+  str.lastIndexOf(&#39;z&#39;) //renvoie -1
+  str.lastIndexOf(&quot;jou&quot;) //renvoie 3
+  str.lastIndexOf(&quot;zou&quot;) //renvoie -1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Méthode <em>pow</em> de la classe Math</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Méthode <em>statique</em> de la classe Math</li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#pow-double-double-">https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#pow-double-double-</a></li>
+<li>Math.pow(pow(double a, double b))
+
+<ul>
+<li>Renvoie a à la puissance b</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Casting de double en int et de int vers double</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">double a=5.1;
+double b=7.2;
+//calcul avec des variables de type double 
+(a * Math.pow(10, b) + .5) / Math.pow(10, b); // renvoie 5.100000031547867
+//casting du résultat en int
+(int) ((a * Math.pow(10, b) + .5) / Math.pow(10, b)); // renvoie 5
+//casting de l&#39;int en double
+(double) ((int) ((a * Math.pow(10, b) + .5) / Math.pow(10, b))); // renvoie 5.0
+}
+
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -196,6 +497,78 @@ for(int i=0;i&lt;2;i++){
          6
       </a>
     </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Restructuration séance 4'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Structures alternatives'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Random'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Classification'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Création et appel de méthode statique'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Recherche de méthodes existantes'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Passage de tableaux en paramètres'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Solution : surcharge de méthode !'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Méthodes de la classe String (1/2)'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Méthodes de la classe String (2/2)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Méthode <em>pow</em> de la classe Math'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Casting de double en int et de int vers double'>
+         18
+      </a>
+    </li>
   </ul>
   </div>  <!--[if IE]>
     <script 
@@ -206,7 +579,21 @@ for(int i=0;i&lt;2;i++){
 </body>
   <!-- Load Javascripts for Widgets -->
   
-  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
   <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <!-- DONE LOADING HIGHLIGHTER JS FILES -->
