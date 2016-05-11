@@ -90,7 +90,7 @@ for(int i=0;i<2;i++){
 
 --- .title-slide
 
-## Restructuration séance 4
+## Restructuration séance 4 (Tableaux)
 
 - Structures conditionnelles / itératives alternatives
 - Retour sur les tableaux
@@ -285,4 +285,26 @@ double b=7.2;
 //casting de l'int en double
 (double) ((int) ((a * Math.pow(10, b) + .5) / Math.pow(10, b))); // renvoie 5.0
 }
+```
+
+--- .title-slide
+
+## Restructuration séance 5 (Classes)
+
+- Méthodes spéciales : Constructeurs, accesseurs, mutateurs
+- Variables d'instances, de classe, locales
+- static ou non
+- Le mot clé this
+- visibilité
+- terminologie
+- debugger
+- boucle alternative (page  68)
+- vérifier que 2 rois ne se touchent pas
+
+---
+
+
+
+    
+    
 
