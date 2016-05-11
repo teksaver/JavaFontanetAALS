@@ -158,7 +158,7 @@ for(int i=0;i&lt;2;i++){
 
 <slide class="title-slide" id="slide-7" style="background:;">
   <hgroup>
-    <h2>Restructuration séance 4</h2>
+    <h2>Restructuration séance 4 (Tableaux)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
@@ -450,8 +450,163 @@ double b=7.2;
 //casting de l&#39;int en double
 (double) ((int) ((a * Math.pow(10, b) + .5) / Math.pow(10, b))); // renvoie 5.0
 }
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="title-slide" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 5 (Classes)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Classes</li>
+<li>Debugger</li>
+<li>Boucles alternatives</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Structure de base d&#39;une classe</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Nom de la classe == nom du fichier == nom du constructeur !</li>
+<li>Constructeur : méthode appelée automatiquement à la création d&#39;un objet
+
+<ul>
+<li>pas de retour : <code>public void MaClasse</code> n&#39;est <em>pas</em> un constructeur</li>
+</ul></li>
+</ul>
+
+<pre><code class="java">/* classe définie dans le fichier MaClasse.java */
+public class MaClasse{
+    int unNombre; // un attribut
+
+    /* constructeur : appelé automatiquement*/
+    public MaClasse(){
+        unNombre=10; // valeur par défaut de l&#39;attribut
+    }
+}
 
 </code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Variables de classe, d&#39;instance et locale</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">public class MaClasse{
+    //  variable d&#39;instance (ou attribut)
+    private int unNombre; //chaque instance a sa propre valeur
+    // variable de classe
+    private static int compteur //valeur partagée entre tous les objets de la classe
+
+    public void uneMethode(){
+        int truc=8; //variable locale, n&#39;existe que dans la méthode
+        unNombre=truc/2; //l&#39;attribut est manipulable dans toutes les méthodes
+    }    
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>méthodes : static ou pas static ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>static : méthode de <em>classe</em></li>
+<li>non static : méthode associée à l&#39;<em>objet</em></li>
+</ul>
+
+<pre><code class="java">// définition dans classe Math
+public static double random()
+// appel dans le programme
+Math.random();
+
+// définition dans classe String
+public String toLowerCase()
+// appel dans le programme
+maChaine.toLowerCase();
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Visibilité</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><code>public</code> : peut être manipulé depuis tout le programme</li>
+<li><code>private</code> : ne peut être utilisé que depuis l&#39;objet lui-même</li>
+<li class='..'>(à suivre)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Attributs, accesseurs, mutateurs et this</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">/* classe définie dans le fichier MaClasse.java */
+public class MaClasse{
+    private int unNombre; //attribut privé, invisible de l&#39;extérieur
+
+    /* setteur : mutateur de l&#39;attribut, est public, manipulable de partout */
+    public void setUnNombre(int unNombre){
+        this.unNombre=unNombre; //this fait référence à l&#39;attribut
+    }
+
+    /* getter : accesseur de l&#39;attribut, est public, donne accès en lecture */
+    public int getUnNombre(){
+        return unNombre;
+    }
+}
+
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Divers</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Vocabulaire : question répondue ?</li>
+<li>passage par valeur ou référence 
+
+<ul>
+<li> <a href="http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value">http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value</a></li>
+</ul></li>
+<li>connaître la valeur des variables pendant l&#39;exécution
+
+<ul>
+<li><a href="http://www.vogella.com/tutorials/EclipseDebugging/article.html">http://www.vogella.com/tutorials/EclipseDebugging/article.html</a></li>
+</ul></li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -499,7 +654,7 @@ double b=7.2;
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Restructuration séance 4'>
+        data-slide=7 title='Restructuration séance 4 (Tableaux)'>
          7
       </a>
     </li>
@@ -567,6 +722,48 @@ double b=7.2;
       <a href="#" target="_self" rel='tooltip' 
         data-slide=18 title='Casting de double en int et de int vers double'>
          18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Restructuration séance 5 (Classes)'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Structure de base d&#39;une classe'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Variables de classe, d&#39;instance et locale'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='méthodes : static ou pas static ?'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Visibilité'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Attributs, accesseurs, mutateurs et this'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='Divers'>
+         25
       </a>
     </li>
   </ul>

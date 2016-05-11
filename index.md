@@ -95,7 +95,7 @@ for(int i=0;i<2;i++){
 
 --- .title-slide
 
-## Restructuration séance 4
+## Restructuration séance 4 (Tableaux)
 
 - Structures conditionnelles / itératives alternatives
 - Retour sur les tableaux
@@ -299,5 +299,110 @@ double b=7.2;
 //casting de l'int en double
 (double) ((int) ((a * Math.pow(10, b) + .5) / Math.pow(10, b))); // renvoie 5.0
 }
+```
+
+--- .title-slide
+
+## Restructuration séance 5 (Classes)
+
+- Classes
+- Debugger
+- Boucles alternatives
+
+---
+
+## Structure de base d'une classe
+
+- Nom de la classe == nom du fichier == nom du constructeur !
+- Constructeur : méthode appelée automatiquement à la création d'un objet
+    - pas de retour : `public void MaClasse` n'est *pas* un constructeur
+
+```java
+/* classe définie dans le fichier MaClasse.java */
+public class MaClasse{
+    int unNombre; // un attribut
+    
+    /* constructeur : appelé automatiquement*/
+    public MaClasse(){
+        unNombre=10; // valeur par défaut de l'attribut
+    }
+}
 
 ```
+
+---
+## Variables de classe, d'instance et locale
+
+```java
+public class MaClasse{
+    //  variable d'instance (ou attribut)
+    private int unNombre; //chaque instance a sa propre valeur
+    // variable de classe
+    private static int compteur //valeur partagée entre tous les objets de la classe
+
+    public void uneMethode(){
+        int truc=8; //variable locale, n'existe que dans la méthode
+        unNombre=truc/2; //l'attribut est manipulable dans toutes les méthodes
+    }    
+}
+```
+
+---
+
+## méthodes : static ou pas static ?
+
+- static : méthode de *classe*
+- non static : méthode associée à l'*objet*
+
+```java
+// définition dans classe Math
+public static double random()
+// appel dans le programme
+Math.random();
+
+// définition dans classe String
+public String toLowerCase()
+// appel dans le programme
+maChaine.toLowerCase();
+```
+
+---
+
+## Visibilité
+
+- `public` : peut être manipulé depuis tout le programme
+- `private` : ne peut être utilisé que depuis l'objet lui-même
+- ... (à suivre)
+
+--- 
+
+## Attributs, accesseurs, mutateurs et this
+
+
+```java
+/* classe définie dans le fichier MaClasse.java */
+public class MaClasse{
+    private int unNombre; //attribut privé, invisible de l'extérieur
+    
+    /* setteur : mutateur de l'attribut, est public, manipulable de partout */
+    public void setUnNombre(int unNombre){
+        this.unNombre=unNombre; //this fait référence à l'attribut
+    }
+    
+    /* getter : accesseur de l'attribut, est public, donne accès en lecture */
+    public int getUnNombre(){
+        return unNombre;
+    }
+}
+
+```
+
+---
+
+## Divers
+
+- Vocabulaire : question répondue ?
+- passage par valeur ou référence 
+   -  http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
+- connaître la valeur des variables pendant l'exécution
+   - http://www.vogella.com/tutorials/EclipseDebugging/article.html
