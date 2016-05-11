@@ -463,8 +463,7 @@ double b=7.2;
   <article data-timings="">
     <ul>
 <li>Classes</li>
-<li>Debugger</li>
-<li>Boucles alternatives</li>
+<li>Questions diverses</li>
 </ul>
 
   </article>
@@ -485,16 +484,15 @@ double b=7.2;
 </ul></li>
 </ul>
 
-<pre><code class="java">/* classe définie dans le fichier MaClasse.java */
+<pre><code>/* classe définie dans le fichier MaClasse.java */
 public class MaClasse{
-    int unNombre; // un attribut
+    private int unNombre; // un attribut
 
     /* constructeur : appelé automatiquement*/
     public MaClasse(){
-        unNombre=10; // valeur par défaut de l&#39;attribut
+        unNombre=10; // valeur de l&#39;attribut à la création
     }
 }
-
 </code></pre>
 
   </article>
@@ -503,18 +501,42 @@ public class MaClasse{
 
 <slide class="" id="slide-21" style="background:;">
   <hgroup>
+    <h2>Visibilité</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><code>public</code> : peut être manipulé depuis tout le programme
+
+<ul>
+<li>concerne généralement les méthodes qui sont connues de l&#39;extérieur</li>
+</ul></li>
+<li><code>private</code> : ne peut être utilisé que depuis l&#39;objet lui-même
+
+<ul>
+<li>les attributs (sauf excellente raison)</li>
+<li>les méthodes utilisées uniquement dans la classe (détail d&#39;implémentation pouvant être modifié sans danger)</li>
+</ul></li>
+<li class='..'>(à suivre)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
     <h2>Variables de classe, d&#39;instance et locale</h2>
   </hgroup>
   <article data-timings="">
     <pre><code class="java">public class MaClasse{
     //  variable d&#39;instance (ou attribut)
-    private int unNombre; //chaque instance a sa propre valeur
+    private int unNombre; // chaque instance a sa propre valeur
     // variable de classe
-    private static int compteur //valeur partagée entre tous les objets de la classe
+    private static int compteur // valeur partagée entre tous les objets de la classe
 
-    public void uneMethode(){
-        int truc=8; //variable locale, n&#39;existe que dans la méthode
-        unNombre=truc/2; //l&#39;attribut est manipulable dans toutes les méthodes
+    public void uneMethode(int param){
+        int truc=param*3; // variable locale, n&#39;existe que dans la méthode
+        unNombre=truc/2; // l&#39;attribut est manipulable dans toutes les méthodes
     }    
 }
 </code></pre>
@@ -523,7 +545,7 @@ public class MaClasse{
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>méthodes : static ou pas static ?</h2>
   </hgroup>
@@ -543,21 +565,6 @@ public String toLowerCase()
 // appel dans le programme
 maChaine.toLowerCase();
 </code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-23" style="background:;">
-  <hgroup>
-    <h2>Visibilité</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><code>public</code> : peut être manipulé depuis tout le programme</li>
-<li><code>private</code> : ne peut être utilisé que depuis l&#39;objet lui-même</li>
-<li class='..'>(à suivre)</li>
-</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -595,7 +602,7 @@ public class MaClasse{
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Vocabulaire : question répondue ?</li>
+<li>vocabulaire / lexique</li>
 <li>passage par valeur ou référence 
 
 <ul>
@@ -738,19 +745,19 @@ public class MaClasse{
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Variables de classe, d&#39;instance et locale'>
+        data-slide=21 title='Visibilité'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='méthodes : static ou pas static ?'>
+        data-slide=22 title='Variables de classe, d&#39;instance et locale'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Visibilité'>
+        data-slide=23 title='méthodes : static ou pas static ?'>
          23
       </a>
     </li>

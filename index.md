@@ -306,8 +306,7 @@ double b=7.2;
 ## Restructuration séance 5 (Classes)
 
 - Classes
-- Debugger
-- Boucles alternatives
+- Questions diverses
 
 ---
 
@@ -316,33 +315,44 @@ double b=7.2;
 - Nom de la classe == nom du fichier == nom du constructeur !
 - Constructeur : méthode appelée automatiquement à la création d'un objet
     - pas de retour : `public void MaClasse` n'est *pas* un constructeur
-
-```java
+    
+```{}
 /* classe définie dans le fichier MaClasse.java */
 public class MaClasse{
-    int unNombre; // un attribut
+    private int unNombre; // un attribut
     
     /* constructeur : appelé automatiquement*/
     public MaClasse(){
-        unNombre=10; // valeur par défaut de l'attribut
+        unNombre=10; // valeur de l'attribut à la création
     }
 }
-
 ```
 
 ---
+
+## Visibilité
+
+- `public` : peut être manipulé depuis tout le programme
+    - concerne généralement les méthodes qui sont connues de l'extérieur
+- `private` : ne peut être utilisé que depuis l'objet lui-même
+    - les attributs (sauf excellente raison)
+    - les méthodes utilisées uniquement dans la classe (détail d'implémentation pouvant être modifié sans danger)
+- ... (à suivre)
+
+--- 
+
 ## Variables de classe, d'instance et locale
 
 ```java
 public class MaClasse{
     //  variable d'instance (ou attribut)
-    private int unNombre; //chaque instance a sa propre valeur
+    private int unNombre; // chaque instance a sa propre valeur
     // variable de classe
-    private static int compteur //valeur partagée entre tous les objets de la classe
+    private static int compteur // valeur partagée entre tous les objets de la classe
 
-    public void uneMethode(){
-        int truc=8; //variable locale, n'existe que dans la méthode
-        unNombre=truc/2; //l'attribut est manipulable dans toutes les méthodes
+    public void uneMethode(int param){
+        int truc=param*3; // variable locale, n'existe que dans la méthode
+        unNombre=truc/2; // l'attribut est manipulable dans toutes les méthodes
     }    
 }
 ```
@@ -367,14 +377,6 @@ maChaine.toLowerCase();
 ```
 
 ---
-
-## Visibilité
-
-- `public` : peut être manipulé depuis tout le programme
-- `private` : ne peut être utilisé que depuis l'objet lui-même
-- ... (à suivre)
-
---- 
 
 ## Attributs, accesseurs, mutateurs et this
 
@@ -401,7 +403,7 @@ public class MaClasse{
 
 ## Divers
 
-- Vocabulaire : question répondue ?
+- vocabulaire / lexique
 - passage par valeur ou référence 
    -  http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
 - connaître la valeur des variables pendant l'exécution
