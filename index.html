@@ -619,6 +619,322 @@ public class MaClasse{
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="title-slide" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 6</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Constructeurs</li>
+<li>Héritage</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Constructeur par défaut</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Le constructeur par défaut est créé automatiquement par JAVA si aucun n&#39;est défini</li>
+<li>Il permet la création d&#39;un objet avec les valeurs d&#39;attributs par défaut</li>
+</ul>
+
+<pre><code class="java">public class A{
+    private int unEntier;
+    private double un Reel;
+}
+
+//main : création de l&#39;objet avec *invocation* (appel) du constructeur par défaut
+A unObjetA=new A(); //unEntier vaut 0 - unReel vaut 0.0
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>Constructeur défini</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Si au moins un constructeur est défini, seuls les constructeurs explicitement définis peuvent être utilisés </li>
+</ul>
+
+<pre><code class="java">public class A{
+    private int unEntier;
+    private double un Reel;
+
+    public A(int entier){
+        this.unEntier=entier; // affectation de la valeur de l&#39;argument à l&#39;attribut
+        this.unReel=3.14 // valeur d&#39;initilisation fixée par le constructeur
+    }
+}
+
+//main
+A unObjetA=new A(); // ne compile pas
+A unObjetA=new A(8); // unEntier vaut 8 - unReel vaut 3.14
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Constructeur et héritage</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Une classe fille <em>ajoute</em> des attributs par rapport à la classe mère</li>
+<li>L&#39;utilisation de super() dans le constructeur permet de ne pas répéter le code des attributs communs</li>
+</ul>
+
+<pre><code class="java">public class B extends A{
+    //unEntier et unReel sont déjà définis dans A
+    private String uneChaine;
+
+    public B(int entier, String chaine){
+        super(entier); // appelle le constructeur de A
+        this.uneChaine=chaine;
+    }
+}
+
+// création de l&#39;objet - unEntier vaut 10 - unReel vaut 3.14 - uneChaine vaut &quot;test&quot;
+B unObjetB=new B(10,&quot;test&quot;);
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Visibilité</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><code>public</code> : peut être manipulé depuis tout le programme
+
+<ul>
+<li>concerne généralement les méthodes qui sont connues de l&#39;extérieur</li>
+</ul></li>
+<li><code>private</code> : ne peut être utilisé que depuis l&#39;objet lui-même
+
+<ul>
+<li>les attributs (sauf excellente raison)</li>
+<li>les méthodes utilisées uniquement dans la classe (détail d&#39;implémentation pouvant être modifié sans danger)</li>
+</ul></li>
+<li><code>protected</code> : est visible uniquement des classes filles
+
+<ul>
+<li>peut être redéfinie par la classe fille</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Doit-on hériter toutes les méthodes ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Une classe fille récupère (hérite) automatiquement toutes les méthodes de la classe mère</li>
+<li>Il est possible de <strong>redéfinir</strong> une (ou plusieurs) méthodes pour <em>changer</em> ou <em>compléter</em> le comportement</li>
+<li>L&#39;appel de la méthode de la classe mère se fait avec le mot clé <strong>super</strong></li>
+</ul>
+
+<pre><code class="java">public class A{
+    public double uneMethode(double var){
+        return var / 2;
+    }
+}
+
+public class B extends A{ //A est la super classe de B
+    //redéfinition réutilisant et complétant la méthode de la super classe
+    public double uneMethode(double var){
+        return super.uneMethode(var) + 1;
+    }
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>Que se passe-t-il si B hérite de A et C hérite de B ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">public class A{
+    public void afficher(){System.out.println(&quot;Bonjour depuis A !!&quot;);}
+}
+public class B extends A{
+    // rien de spécial
+}
+public class C extends B{
+    // rédéfinition !
+    public void afficher(){System.out.println(&quot;Bonjour depuis C !!&quot;);}
+}
+
+//main 
+A objA=new A(); objA.afficher(); // affiche Bonjour depuis A !!
+B objA=new B(); objB.afficher(); // affiche Bonjour depuis A !!
+C objA=new C(); objC.afficher(); // affiche Bonjour depuis C !!
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>Covariance</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>un tableau de type A peut contenir des objets de type B si (et seulement si) B hérite de A</li>
+</ul>
+
+<p>(A est la superclasse de B)</p>
+
+<pre><code class="java">
+A tabDeA[] ; //déclaration d&#39;un tableau de A
+tabDeA = new A[50]; // allocation mémoire
+
+A unA=new A(); // création d&#39;un objet de type A
+B unB=new B(); // création d&#39;un objet de type B
+
+tabDeA[0]=unA; 
+tabDeA[1]=unB; //OK, si B hérite de A
+</code></pre>
+
+<ul>
+<li>version longue : <a href="https://dzone.com/articles/covariance-and-contravariance">https://dzone.com/articles/covariance-and-contravariance</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>Que contient le tableau de la page 107 ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">Ville[] tableau = new Ville[6];
+tableau[0] = new Ville(&quot;Marseille&quot;, 13000, &quot;France&quot;);
+tableau[1]= new Capitale(&quot;Paris&quot;, &quot;75000&quot;, &quot;France&quot;, &quot;la tour Eiffel&quot;);
+
+</code></pre>
+
+<ul>
+<li>tableau accepte des objets de type <strong>Ville</strong> <em>et ses sous-classes</em> (dont <strong>Capitale</strong>)</li>
+<li>chaque case de tableau contient la <strong>valeur de l&#39;adresse mémoire</strong> de l&#39;objet</li>
+<li>à la compilation, seules les méthodes définies dans <strong>Ville</strong> sont utilisables</li>
+<li>à l&#39;exécution, la méthode de <strong>l&#39;objet</strong> est utilisée (y compris si elle est redéfinie)</li>
+</ul>
+
+<pre><code class="java">tableau[1].decrisToi(); // appel de la méthode de l&#39;objet référencé
+Object truc = tableau[1];
+truc.decrisToi(); // ne compile pas ! decrisToi() n&#39;est pas défini pour Object
+truc.toString(); //OK, car toString() est défini pour tous les objets !
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>Retour sur le transtypage</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Transtypage : conversion du type d&#39;un objet en un autre type</li>
+</ul>
+
+<pre><code class="java">//exemple avec type primitif
+int a=5;
+double resultat = a/2; // division entre 2 entiers, resultat vaut 2
+resultat = (double) a /2; // transtypage de a : resultat vaut 2.5
+
+//exemple de transtypage entre classes
+Object truc = new Ville(&quot;Marseille&quot;, 13000, &quot;France&quot;);
+truc.decrisToi(); // ne compile pas ! decrisToi() n&#39;est pas défini pour Object
+(Ville) truc.decrisToi(); // truc est transtypé, la méthode decrisToi() est utilisable
+</code></pre>
+
+<ul>
+<li>permet la compilation, mais crash à l&#39;exécution si l&#39;objet n&#39;est pas du bon type</li>
+</ul>
+
+<pre><code class="java">// compile mais crashe à l&#39;exécution si NestPasUneVille ne définit pas decrisToi() 
+Objet machin= new NestPasUneVille(&quot;nimportequoi&quot;);
+(Ville) machin.decrisToi(); //crash si NestPasUneVille ne définit pas decrisToi()
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>hashCode() et equals()</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>méthodes de la classe <strong>Object</strong> définie (ou redéfinie) pour tous les objets</li>
+<li>permettent les opérations de <em>classication</em> et de <em>comparaison</em></li>
+</ul>
+
+<pre><code class="java">//hashCode définit un identifiant unique pour chaque objet de la Classe Ville
+public int hashCode(){
+    return (this.nomPays.hashCode()+this.nomVille.hashCode());
+}
+
+//equals définit les critères d&#39;égalité d&#39;un objet avec un autre
+public boolean equals(Ville v){
+    return (this.hashCode() == v.hashCode() &amp;&amp;
+        this.getNombreHabitant() == v.getNombreHabitant());
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Questions diverses</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Pourquoi <code>boolean flag = Boolean.getBoolean(&quot;true&quot;);</code> renvoie toujours false ?</li>
+<li>Peut-on utiliser A.i n&#39;importe où si i est défini comme :</li>
+</ul>
+
+<pre><code class="java">class A{
+public static final int i;
+} 
+</code></pre>
+
+<ul>
+<li>Retour sur les boucles</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -771,6 +1087,78 @@ public class MaClasse{
       <a href="#" target="_self" rel='tooltip' 
         data-slide=25 title='Divers'>
          25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='Restructuration séance 6'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Constructeur par défaut'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Constructeur défini'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='Constructeur et héritage'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='Visibilité'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='Doit-on hériter toutes les méthodes ?'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='Que se passe-t-il si B hérite de A et C hérite de B ?'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='Covariance'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='Que contient le tableau de la page 107 ?'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='Retour sur le transtypage'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='hashCode() et equals()'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Questions diverses'>
+         37
       </a>
     </li>
   </ul>

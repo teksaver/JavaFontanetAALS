@@ -3,7 +3,7 @@ title       : "Support de restructuration"
 subtitle    : "Réponse à vos questions"
 author      : Sylvain Tenier
 job         : s.tenier@groupe-esigelec.fr
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+framework   : io2012 # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : mathjax            # {mathjax, quiz, bootstrap}
@@ -391,3 +391,233 @@ public class MaClasse{
    -  http://stackoverflow.com/questions/40480/is-java-pass-by-reference-or-pass-by-value
 - connaître la valeur des variables pendant l'exécution
    - http://www.vogella.com/tutorials/EclipseDebugging/article.html
+
+--- .title-slide
+
+## Restructuration séance 6
+
+- Constructeurs
+- Héritage
+
+---
+
+## Constructeur par défaut
+
+- Le constructeur par défaut est créé automatiquement par JAVA si aucun n'est défini
+- Il permet la création d'un objet avec les valeurs d'attributs par défaut
+```{java}
+public class A{
+    private int unEntier;
+    private double un Reel;
+}
+
+//main : création de l'objet avec *invocation* (appel) du constructeur par défaut
+A unObjetA=new A(); //unEntier vaut 0 - unReel vaut 0.0
+```
+
+---
+
+## Constructeur défini
+
+- Si au moins un constructeur est défini, seuls les constructeurs explicitement définis peuvent être utilisés 
+```{java}
+public class A{
+    private int unEntier;
+    private double un Reel;
+    
+    public A(int entier){
+        this.unEntier=entier; // affectation de la valeur de l'argument à l'attribut
+        this.unReel=3.14 // valeur d'initilisation fixée par le constructeur
+    }
+}
+
+//main
+A unObjetA=new A(); // ne compile pas
+A unObjetA=new A(8); // unEntier vaut 8 - unReel vaut 3.14
+```
+
+---
+
+## Constructeur et héritage
+
+- Une classe fille *ajoute* des attributs par rapport à la classe mère
+- L'utilisation de super() dans le constructeur permet de ne pas répéter le code des attributs communs
+```{java}
+public class B extends A{
+    //unEntier et unReel sont déjà définis dans A
+    private String uneChaine;
+
+    public B(int entier, String chaine){
+        super(entier); // appelle le constructeur de A
+        this.uneChaine=chaine;
+    }
+}
+
+// création de l'objet - unEntier vaut 10 - unReel vaut 3.14 - uneChaine vaut "test"
+B unObjetB=new B(10,"test");
+```
+
+---
+
+## Visibilité
+
+- `public` : peut être manipulé depuis tout le programme
+    - concerne généralement les méthodes qui sont connues de l'extérieur
+- `private` : ne peut être utilisé que depuis l'objet lui-même
+    - les attributs (sauf excellente raison)
+    - les méthodes utilisées uniquement dans la classe (détail d'implémentation pouvant être modifié sans danger)
+- `protected` : est visible uniquement des classes filles
+    - peut être redéfinie par la classe fille
+
+--- 
+
+
+## Doit-on hériter toutes les méthodes ?
+
+- Une classe fille récupère (hérite) automatiquement toutes les méthodes de la classe mère
+- Il est possible de **redéfinir** une (ou plusieurs) méthodes pour *changer* ou *compléter* le comportement
+- L'appel de la méthode de la classe mère se fait avec le mot clé **super**
+
+```{java}
+public class A{
+    public double uneMethode(double var){
+        return var / 2;
+    }
+}
+
+public class B extends A{ //A est la super classe de B
+    //redéfinition réutilisant et complétant la méthode de la super classe
+    public double uneMethode(double var){
+        return super.uneMethode(var) + 1;
+    }
+}
+```
+
+---
+
+
+
+
+## Que se passe-t-il si B hérite de A et C hérite de B ?
+
+```{java}
+public class A{
+    public void afficher(){System.out.println("Bonjour depuis A !!");}
+}
+public class B extends A{
+    // rien de spécial
+}
+public class C extends B{
+    // rédéfinition !
+    public void afficher(){System.out.println("Bonjour depuis C !!");}
+}
+
+//main 
+A objA=new A(); objA.afficher(); // affiche Bonjour depuis A !!
+B objA=new B(); objB.afficher(); // affiche Bonjour depuis A !!
+C objA=new C(); objC.afficher(); // affiche Bonjour depuis C !!
+```
+
+---
+
+## Covariance
+
+- un tableau de type A peut contenir des objets de type B si (et seulement si) B hérite de A
+
+(A est la superclasse de B)
+
+```{java}
+
+A tabDeA[] ; //déclaration d'un tableau de A
+tabDeA = new A[50]; // allocation mémoire
+
+A unA=new A(); // création d'un objet de type A
+B unB=new B(); // création d'un objet de type B
+
+tabDeA[0]=unA; 
+tabDeA[1]=unB; //OK, si B hérite de A
+```
+
+- version longue : https://dzone.com/articles/covariance-and-contravariance
+
+---
+
+## Que contient le tableau de la page 107 ?
+
+```{java}
+Ville[] tableau = new Ville[6];
+tableau[0] = new Ville("Marseille", 13000, "France");
+tableau[1]= new Capitale("Paris", "75000", "France", "la tour Eiffel");
+
+```
+
+- tableau accepte des objets de type **Ville** *et ses sous-classes* (dont **Capitale**)
+- chaque case de tableau contient la **valeur de l'adresse mémoire** de l'objet
+- à la compilation, seules les méthodes définies dans **Ville** sont utilisables
+- à l'exécution, la méthode de **l'objet** est utilisée (y compris si elle est redéfinie)
+
+```{java}
+tableau[1].decrisToi(); // appel de la méthode de l'objet référencé
+Object truc = tableau[1];
+truc.decrisToi(); // ne compile pas ! decrisToi() n'est pas défini pour Object
+truc.toString(); //OK, car toString() est défini pour tous les objets !
+```
+
+---
+
+## Retour sur le transtypage
+
+- Transtypage : conversion du type d'un objet en un autre type
+
+```{java}
+//exemple avec type primitif
+int a=5;
+double resultat = a/2; // division entre 2 entiers, resultat vaut 2
+resultat = (double) a /2; // transtypage de a : resultat vaut 2.5
+
+//exemple de transtypage entre classes
+Object truc = new Ville("Marseille", 13000, "France");
+truc.decrisToi(); // ne compile pas ! decrisToi() n'est pas défini pour Object
+(Ville) truc.decrisToi(); // truc est transtypé, la méthode decrisToi() est utilisable
+```
+
+- permet la compilation, mais crash à l'exécution si l'objet n'est pas du bon type
+
+```{java}
+// compile mais crashe à l'exécution si NestPasUneVille ne définit pas decrisToi() 
+Objet machin= new NestPasUneVille("nimportequoi");
+(Ville) machin.decrisToi(); //crash si NestPasUneVille ne définit pas decrisToi()
+```
+
+---
+
+## hashCode() et equals()
+
+- méthodes de la classe **Object** définie (ou redéfinie) pour tous les objets
+- permettent les opérations de *classication* et de *comparaison*
+
+```{java}
+//hashCode définit un identifiant unique pour chaque objet de la Classe Ville
+public int hashCode(){
+    return (this.nomPays.hashCode()+this.nomVille.hashCode());
+}
+
+//equals définit les critères d'égalité d'un objet avec un autre
+public boolean equals(Ville v){
+    return (this.hashCode() == v.hashCode() &&
+        this.getNombreHabitant() == v.getNombreHabitant());
+}
+```
+
+---
+
+## Questions diverses
+
+- Pourquoi `boolean flag = Boolean.getBoolean("true");` renvoie toujours false ?
+- Peut-on utiliser A.i n'importe où si i est défini comme :
+```{java}
+class A{
+public static final int i;
+} 
+```
+- Retour sur les boucles
