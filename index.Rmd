@@ -621,3 +621,14 @@ public static final int i;
 } 
 ```
 - Retour sur les boucles
+
+--- .title-slide
+
+## Restructuration séance 7
+
+- Les collections
+- La généricité
+
+
+
+
