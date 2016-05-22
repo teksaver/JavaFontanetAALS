@@ -536,8 +536,8 @@ public class C extends B{
 
 //main 
 A objA=new A(); objA.afficher(); // affiche Bonjour depuis A !!
-B objA=new B(); objB.afficher(); // affiche Bonjour depuis A !!
-C objA=new C(); objC.afficher(); // affiche Bonjour depuis C !!
+B objB=new B(); objB.afficher(); // affiche Bonjour depuis A !!
+C objC=new C(); objC.afficher(); // affiche Bonjour depuis C !!
 ```
 
 ---
@@ -571,7 +571,7 @@ tabDeA[1]=unB; //OK, si B hérite de A
 ```java
 Ville[] tableau = new Ville[6];
 tableau[0] = new Ville("Marseille", 13000, "France");
-tableau[1]= new Capitale("Paris", "75000", "France", "la tour Eiffel");
+tableau[1]= new Capitale("Paris", 75000, "France", "la tour Eiffel");
 
 ```
 
@@ -650,3 +650,129 @@ public static final int i;
 } 
 ```
 - Retour sur les boucles
+
+--- .title-slide
+
+## Restructuration séance 7
+
+- Les collections
+- La généricité
+- Retour sur l'héritage
+
+---
+
+## Que faut-il retenir ?
+
+- Deux interfaces utiles : *List* et *Map*
+
+- Une liste est un *tableau dynamique* 
+    - pas de taille limite
+    - méthodes pour les différents opérations
+    - A connaitre : **ArrayList**
+
+- Un map est un système *clé/valeur*
+    - La clé identifie l'objet (remplace l'index)
+    - La valeur est l'objet lui-même
+    - A connaitre : **HashMap**
+
+---
+
+## Opérations 
+
+- Sur les listes https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+    - ajout : *add*
+    - récupération : *get*
+    - existence : *contains*
+    - suppression : *remove* 
+- Sur les map https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+    - ajout : *put*
+    - récupération : *get* (retourne *null* si clé non trouvée)
+    - existence : *containsKey*/*containsValue*
+    - suppression : *remove*
+
+---
+
+## Généricité ?
+- Sans généricité ?
+    - Les valeurs insérées sont considérées de type *Object*
+    - La valeur doit être castée à la récupération
+
+```java
+    Arraylist al= new ArrayList();
+    al.add("Une chaine");
+    String chaine=(String)al.get(0);
+```
+
+- Fixe les valeurs autorisées
+    - Garantit l'insertion d'objets de la classe fixée entre < et >
+    - Garantit de récupérer des objet de cette classe
+
+```java
+    ArrayList<String> al=new ArrayList<String>();
+    al.add("Une chaine");
+    String chaine=al.get(0);
+```
+
+---
+
+## Itérations simples sur Hashmap
+
+- Sur *ArrayList*
+
+```java
+ArrayList<Double> al=new ArrayList<Double>();
+for (Double valeur : al) {
+	System.out.println(valeur);
+}
+```
+
+- Sur *Hashmap*
+
+
+```java
+Map<String, Integer> map = new HashMap<String, Integer>();
+for (Map.Entry<String, Integer> entry : map.entrySet()) {
+    System.out.println("clé = " + entry.getKey() + ", valeur = " + entry.getValue());
+}
+```
+
+---
+
+## Utilisation explicite de la classe Iterator
+
+- ArrayList
+
+```java
+ArrayList<Double> al=new ArrayList<Double>();
+Iterator<String> listIterator = al.iterator();
+while (listIterator.hasNext()) {
+	System.out.println(listIterator.next());
+}
+```
+- Map
+
+```java
+Map<String, Integer> map = new HashMap<String, Integer>();
+Iterator<Map.Entry<String, Integer>> entrees = map.entrySet().iterator();
+while (entrees.hasNext()) {
+    Map.Entry<String, Integer> entry = entrees.next();
+    System.out.println("Key = " + entrees.getKey() + ", Value = " + entrees.getValue());
+}
+```
+
+---
+
+## Héritage et constructeur avec paramètre
+
+- Classe `Personne` : 3 attributs `nom`, `prenom`, `age`
+- Constructeur avec paramètre `public Personne(String nom, String prenom, int age)`
+- Les sous-classes doivent définir un constructeur qui appelle ce constructeur avec `super`
+
+
+```java
+Classe Inconnu extends Personne
+    String lieu;
+    public Inconnu(int age, String lieu)
+        super("John","Doe",age)
+        this.lieu=lieu;
+```

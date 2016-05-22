@@ -787,8 +787,8 @@ public class C extends B{
 
 //main 
 A objA=new A(); objA.afficher(); // affiche Bonjour depuis A !!
-B objA=new B(); objB.afficher(); // affiche Bonjour depuis A !!
-C objA=new C(); objC.afficher(); // affiche Bonjour depuis C !!
+B objB=new B(); objB.afficher(); // affiche Bonjour depuis A !!
+C objC=new C(); objC.afficher(); // affiche Bonjour depuis C !!
 </code></pre>
 
   </article>
@@ -832,7 +832,7 @@ tabDeA[1]=unB; //OK, si B hérite de A
   <article data-timings="">
     <pre><code class="java">Ville[] tableau = new Ville[6];
 tableau[0] = new Ville(&quot;Marseille&quot;, 13000, &quot;France&quot;);
-tableau[1]= new Capitale(&quot;Paris&quot;, &quot;75000&quot;, &quot;France&quot;, &quot;la tour Eiffel&quot;);
+tableau[1]= new Capitale(&quot;Paris&quot;, 75000, &quot;France&quot;, &quot;la tour Eiffel&quot;);
 
 </code></pre>
 
@@ -930,6 +930,196 @@ public static final int i;
 <ul>
 <li>Retour sur les boucles</li>
 </ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="title-slide" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 7</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les collections</li>
+<li>La généricité</li>
+<li>Retour sur l&#39;héritage</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-39" style="background:;">
+  <hgroup>
+    <h2>Que faut-il retenir ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Deux interfaces utiles : <em>List</em> et <em>Map</em></p></li>
+<li><p>Une liste est un <em>tableau dynamique</em> </p>
+
+<ul>
+<li>pas de taille limite</li>
+<li>méthodes pour les différents opérations</li>
+<li>A connaitre : <strong>ArrayList</strong></li>
+</ul></li>
+<li><p>Un map est un système <em>clé/valeur</em></p>
+
+<ul>
+<li>La clé identifie l&#39;objet (remplace l&#39;index)</li>
+<li>La valeur est l&#39;objet lui-même</li>
+<li>A connaitre : <strong>HashMap</strong></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-40" style="background:;">
+  <hgroup>
+    <h2>Opérations</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Sur les listes <a href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html</a>
+
+<ul>
+<li>ajout : <em>add</em></li>
+<li>récupération : <em>get</em></li>
+<li>existence : <em>contains</em></li>
+<li>suppression : <em>remove</em> </li>
+</ul></li>
+<li>Sur les map <a href="https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html">https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html</a>
+
+<ul>
+<li>ajout : <em>put</em></li>
+<li>récupération : <em>get</em> (retourne <em>null</em> si clé non trouvée)</li>
+<li>existence : <em>containsKey</em>/<em>containsValue</em></li>
+<li>suppression : <em>remove</em></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>Généricité ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Sans généricité ?
+
+<ul>
+<li>Les valeurs insérées sont considérées de type <em>Object</em></li>
+<li>La valeur doit être castée à la récupération</li>
+</ul></li>
+</ul>
+
+<pre><code class="java">    Arraylist al= new ArrayList();
+    al.add(&quot;Une chaine&quot;);
+    String chaine=(String)al.get(0);
+</code></pre>
+
+<ul>
+<li>Fixe les valeurs autorisées
+
+<ul>
+<li>Garantit l&#39;insertion d&#39;objets de la classe fixée entre &lt; et &gt;</li>
+<li>Garantit de récupérer des objet de cette classe</li>
+</ul></li>
+</ul>
+
+<pre><code class="java">    ArrayList&lt;String&gt; al=new ArrayList&lt;String&gt;();
+    al.add(&quot;Une chaine&quot;);
+    String chaine=al.get(0);
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-42" style="background:;">
+  <hgroup>
+    <h2>Itérations simples sur Hashmap</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Sur <em>ArrayList</em></li>
+</ul>
+
+<pre><code class="java">ArrayList&lt;Double&gt; al=new ArrayList&lt;Double&gt;();
+for (Double valeur : al) {
+    System.out.println(valeur);
+}
+</code></pre>
+
+<ul>
+<li>Sur <em>Hashmap</em></li>
+</ul>
+
+<pre><code class="java">Map&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+for (Map.Entry&lt;String, Integer&gt; entry : map.entrySet()) {
+    System.out.println(&quot;clé = &quot; + entry.getKey() + &quot;, valeur = &quot; + entry.getValue());
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-43" style="background:;">
+  <hgroup>
+    <h2>Utilisation explicite de la classe Iterator</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>ArrayList</li>
+</ul>
+
+<pre><code class="java">ArrayList&lt;Double&gt; al=new ArrayList&lt;Double&gt;();
+Iterator&lt;String&gt; listIterator = al.iterator();
+while (listIterator.hasNext()) {
+    System.out.println(listIterator.next());
+}
+</code></pre>
+
+<ul>
+<li>Map</li>
+</ul>
+
+<pre><code class="java">Map&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; entrees = map.entrySet().iterator();
+while (entrees.hasNext()) {
+    Map.Entry&lt;String, Integer&gt; entry = entrees.next();
+    System.out.println(&quot;Key = &quot; + entrees.getKey() + &quot;, Value = &quot; + entrees.getValue());
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-44" style="background:;">
+  <hgroup>
+    <h2>Héritage et constructeur avec paramètre</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Classe <code>Personne</code> : 3 attributs <code>nom</code>, <code>prenom</code>, <code>age</code></li>
+<li>Constructeur avec paramètre <code>public Personne(String nom, String prenom, int age)</code></li>
+<li>Les sous-classes doivent définir un constructeur qui appelle ce constructeur avec <code>super</code></li>
+</ul>
+
+<pre><code class="java">Classe Inconnu extends Personne
+    String lieu;
+    public Inconnu(int age, String lieu)
+        super(&quot;John&quot;,&quot;Doe&quot;,age)
+        this.lieu=lieu;
+</code></pre>
 
   </article>
   <!-- Presenter Notes -->
@@ -1159,6 +1349,48 @@ public static final int i;
       <a href="#" target="_self" rel='tooltip' 
         data-slide=37 title='Questions diverses'>
          37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Restructuration séance 7'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Que faut-il retenir ?'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='Opérations'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='Généricité ?'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='Itérations simples sur Hashmap'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='Utilisation explicite de la classe Iterator'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='Héritage et constructeur avec paramètre'>
+         44
       </a>
     </li>
   </ul>
