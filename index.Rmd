@@ -751,6 +751,10 @@ Classe Inconnu extends Personne
 
 Oui
 
+## Est-ce dangereux, prématuré ?
+
+Non, indispensable
+
 ---
 
 ## Pourquoi ?
@@ -821,8 +825,36 @@ sortie du programme</code>
 
 ---
 
+## Multiples catchs
+
+- Les exceptions sont des *objets* issus d'une hiérarchie dont la racine est *Exception*
+    - Exemple : https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html
+- Lorsqu'une exception est levée, les catch sont analysés dans l'ordre de leur déclaration
+- Un catch est traité si l'objet *appartient* à ou est un *descendant* de la classe Exception en paramètre du catch
+    - Une exception issue de la classe `ArithmeticException` sera donc traitée par `catch(ArithmeticException e)` tout comme par `catch(Exception  e)`
+
+---
+
+## InputStream/OutputStream
+
+---
+
+## Lecture/Ecriture d'un fichier dans/en dehors du projet
 
 
-## Chargement d'un fichier dans/en dehors du projet
+---
 
+## Questions diverses
 
+- Sérialisation
+    - Objectif d'apprentissage à connaitre, pas à appliquer
+    - Permet de sauvegarder l'état d'un objet et de le "transporter"
+    - Transient : indique les éléments à ne *pas* sérialiser
+    
+- Travail sur fichiers "tableurs"
+    - Excel : https://poi.apache.org/
+    - CSV :http://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
+    - Langage (non JAVA) adapté à l'exploration de données : https://www.r-project.org/
+    
+- Pourquoi on ajoute les `java.io.File`, `java.io.FileInputStream`, `java.io.FileOutputSteam`, `java.io.IOException`, ...
+    - Ces classes sont définies en dehors de `java.lang`, ils faut donc les importer
