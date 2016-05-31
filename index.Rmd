@@ -495,9 +495,6 @@ public class B extends A{ //A est la super classe de B
 
 ---
 
-
-
-
 ## Que se passe-t-il si B hérite de A et C hérite de B ?
 
 ```{java}
@@ -740,3 +737,92 @@ Classe Inconnu extends Personne
         super("John","Doe",age)
         this.lieu=lieu;
 ```
+
+--- .title-slide
+
+## Restructuration séance 8
+
+- Les exceptions
+- Les fichiers texte
+
+---
+
+## Les exceptions : est-ce vraiment utile ?
+
+Oui
+
+---
+
+## Pourquoi ?
+
+- Evite de mélanger le code "utile" et la gestion des erreurs 
+    - débat ouvert : https://golang.org/doc/faq#exceptions
+- La valeur de retour d'une méthode n'est pas toujours disponible pour indiquer une erreur
+    - exemple extrême : le constructeur n'a pas de valeur de retour !
+- Les classes que vous importez peuvent implémenter des exceptions qu'il faut savoir gérer
+    - par exemple, pour gérer les fichiers...
+
+---
+
+## Exemple du constructeur
+
+```{java}
+public class AgeValide {
+	int age;
+    
+    //Le constructeur n'accepte de créer l'objet que si l'argument est valide
+	public AgeValide(int age) {
+		if (age >=0 && age < 125)
+			this.age = age;
+		else{
+			throw new IllegalArgumentException();
+		}
+	}
+
+```
+
+---
+
+## Doit-on utiliser obligatoirement try..catch ?
+
+```{java}
+	public static void main(String[] args) {
+		AgeValide valide=new AgeValide(20);  // objet créé
+		AgeValide nonvalide=new AgeValide(300); // exception
+		System.out.println("fin du programme");
+    }
+```
+Le programme crashe et affiche :
+
+<code>  Exception in thread "main" java.lang.IllegalArgumentException<br>
+	    at AgeValide.<init>(AgeValide.java:9)<br>
+	    at AgeValide.main(AgeValide.java:15)
+</code>
+
+---
+
+## Avec try..catch 
+
+```{java}
+	public static void main(String[] args) {
+		try{
+			AgeValide valide=new AgeValide(20);
+			AgeValide nonvalide=new AgeValide(300);
+		}catch(Exception e){
+			e.printStackTrace(); //affiche l'exception
+		}
+		System.out.println("sortie du programme");
+}
+```
+<code>java.lang.IllegalArgumentException<br>
+	at AgeValide.<init>(AgeValide.java:9)<br>
+	at AgeValide.main(AgeValide.java:16)<br>
+sortie du programme</code>
+
+---
+
+
+
+## Chargement d'un fichier dans/en dehors du projet
+
+
