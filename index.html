@@ -1125,6 +1125,260 @@ while (entrees.hasNext()) {
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="title-slide" id="slide-45" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 8</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les exceptions</li>
+<li>Les fichiers texte</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-46" style="background:;">
+  <hgroup>
+    <h2>Les exceptions : est-ce vraiment utile ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Oui</p>
+
+<h2>Est-ce dangereux, prématuré ?</h2>
+
+<p>Non, indispensable</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-47" style="background:;">
+  <hgroup>
+    <h2>Pourquoi ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Evite de mélanger le code &quot;utile&quot; et la gestion des erreurs 
+
+<ul>
+<li>débat ouvert : <a href="https://golang.org/doc/faq#exceptions">https://golang.org/doc/faq#exceptions</a></li>
+</ul></li>
+<li>La valeur de retour d&#39;une méthode n&#39;est pas toujours disponible pour indiquer une erreur
+
+<ul>
+<li>exemple extrême : le constructeur n&#39;a pas de valeur de retour !</li>
+</ul></li>
+<li>Les classes que vous importez peuvent implémenter des exceptions qu&#39;il faut savoir gérer
+
+<ul>
+<li>par exemple, pour gérer les fichiers...</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-48" style="background:;">
+  <hgroup>
+    <h2>Exemple du constructeur</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">public class AgeValide {
+    int age;
+
+    //Le constructeur n&#39;accepte de créer l&#39;objet que si l&#39;argument est valide
+    public AgeValide(int age) {
+        if (age &gt;=0 &amp;&amp; age &lt; 125)
+            this.age = age;
+        else{
+            throw new IllegalArgumentException();
+        }
+    }
+
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-49" style="background:;">
+  <hgroup>
+    <h2>Doit-on utiliser obligatoirement try..catch ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">    public static void main(String[] args) {
+        AgeValide valide=new AgeValide(20);  // objet créé
+        AgeValide nonvalide=new AgeValide(300); // exception
+        System.out.println(&quot;fin du programme&quot;);
+    }
+</code></pre>
+
+<p>Le programme crashe et affiche :</p>
+
+<p><code>  Exception in thread &quot;main&quot; java.lang.IllegalArgumentException<br>
+        at AgeValide.<init>(AgeValide.java:9)<br>
+        at AgeValide.main(AgeValide.java:15)
+</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-50" style="background:;">
+  <hgroup>
+    <h2>Avec try..catch</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">    public static void main(String[] args) {
+        try{
+            AgeValide valide=new AgeValide(20);
+            AgeValide nonvalide=new AgeValide(300);
+        }catch(Exception e){
+            e.printStackTrace(); //affiche l&#39;exception
+        }
+        System.out.println(&quot;sortie du programme&quot;);
+}
+</code></pre>
+
+<p><code>java.lang.IllegalArgumentException<br>
+    at AgeValide.<init>(AgeValide.java:9)<br>
+    at AgeValide.main(AgeValide.java:16)<br>
+sortie du programme</code></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-51" style="background:;">
+  <hgroup>
+    <h2>Multiples catchs</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les exceptions sont des <em>objets</em> issus d&#39;une hiérarchie dont la racine est <em>Exception</em>
+
+<ul>
+<li>Exemple : <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html">https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html</a></li>
+</ul></li>
+<li>Lorsqu&#39;une exception est levée, les catch sont analysés dans l&#39;ordre de leur déclaration</li>
+<li>Un catch est traité si l&#39;objet <em>appartient</em> à ou est un <em>descendant</em> de la classe Exception en paramètre du catch
+
+<ul>
+<li>Une exception issue de la classe <code>ArithmeticException</code> sera donc traitée par <code>catch(ArithmeticException e)</code> tout comme par <code>catch(Exception  e)</code></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-52" style="background:;">
+  <hgroup>
+    <h2>InputStream/OutputStream</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Ecriture / lecture sous forme binaire</li>
+<li>Utile pour la sérialisation (voir questions diverses)</li>
+<li>Principe à connaître, mais pas son application</li>
+<li>Nous allons nous intéresser aux fichiers <em>texte</em></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-53" style="background:;">
+  <hgroup>
+    <h2>Lecture/Ecriture d&#39;un fichier en dehors du projet</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">public static void main(String[] args) {
+    try {
+        //ouverture du fichier avec un chemin absolu
+        FileReader fp=new FileReader(new File(&quot;c:\\temp\\dansTemp.txt&quot;));
+        //lecture ligne par ligne dans un buffer
+        String ligne;
+        BufferedReader br = new BufferedReader(fp);
+        while((ligne=br.readLine())!=null){
+            System.out.println(ligne);
+            }
+        fp.close();
+    } catch (FileNotFoundException e) {
+        System.out.println(&quot;Fichier non trouvé&quot;);
+    } catch (IOException e) {
+        System.out.println(&quot;Erreur de lecture&quot;);
+    }
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-54" style="background:;">
+  <hgroup>
+    <h2>Lecture d&#39;un fichier situé dans le projet</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les fichiers peuvent être intégrés au projet
+
+<ul>
+<li>Ils doivent être en dehors du dossier <code>src</code></li>
+<li>Exemple :</li>
+</ul></li>
+</ul>
+
+<p><img src="./orgaProjet.png" alt="projet Eclipse"></p>
+
+<ul>
+<li>Pour y accéder 
+
+<ul>
+<li>remplacer <code>new FileReader(new File(&quot;c:\\temp\\dansTemp.txt&quot;));</code> </li>
+<li>par <code>new FileReader(new File(&quot;Fichiers/dansProjet.txt&quot;));</code></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-55" style="background:;">
+  <hgroup>
+    <h2>Questions diverses</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Sérialisation</p>
+
+<ul>
+<li>Objectif d&#39;apprentissage à connaitre, pas à appliquer</li>
+<li>Permet de sauvegarder l&#39;état d&#39;un objet et de le &quot;transporter&quot;</li>
+<li>Transient : indique les éléments à ne <em>pas</em> sérialiser</li>
+</ul></li>
+<li><p>Travail sur fichiers &quot;tableurs&quot;</p>
+
+<ul>
+<li>Excel : <a href="https://poi.apache.org/">https://poi.apache.org/</a></li>
+<li>CSV :<a href="http://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/">http://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/</a></li>
+<li>Langage (non JAVA) adapté à l&#39;exploration de données : <a href="https://www.r-project.org/">https://www.r-project.org/</a></li>
+</ul></li>
+<li><p>Pourquoi on ajoute les <code>java.io.File</code>, <code>java.io.FileInputStream</code>, <code>java.io.FileOutputSteam</code>, <code>java.io.IOException</code>, ...</p>
+
+<ul>
+<li>Ces classes sont définies en dehors de <code>java.lang</code>, ils faut donc les importer</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -1391,6 +1645,72 @@ while (entrees.hasNext()) {
       <a href="#" target="_self" rel='tooltip' 
         data-slide=44 title='Héritage et constructeur avec paramètre'>
          44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='Restructuration séance 8'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='Les exceptions : est-ce vraiment utile ?'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='Pourquoi ?'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='Exemple du constructeur'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='Doit-on utiliser obligatoirement try..catch ?'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='Avec try..catch'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='Multiples catchs'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='InputStream/OutputStream'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='Lecture/Ecriture d&#39;un fichier en dehors du projet'>
+         53
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=54 title='Lecture d&#39;un fichier situé dans le projet'>
+         54
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=55 title='Questions diverses'>
+         55
       </a>
     </li>
   </ul>

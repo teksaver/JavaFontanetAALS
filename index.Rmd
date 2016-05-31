@@ -836,11 +836,49 @@ sortie du programme</code>
 ---
 
 ## InputStream/OutputStream
+ 
+ - Ecriture / lecture sous forme binaire
+ - Utile pour la sérialisation (voir questions diverses)
+ - Principe à connaître, mais pas son application
+ - Nous allons nous intéresser aux fichiers *texte*
 
 ---
 
-## Lecture/Ecriture d'un fichier dans/en dehors du projet
+## Lecture/Ecriture d'un fichier en dehors du projet
 
+```{java}
+public static void main(String[] args) {
+	try {
+		//ouverture du fichier avec un chemin absolu
+		FileReader fp=new FileReader(new File("c:\\temp\\dansTemp.txt"));
+		//lecture ligne par ligne dans un buffer
+		String ligne;
+		BufferedReader br = new BufferedReader(fp);
+		while((ligne=br.readLine())!=null){
+			System.out.println(ligne);
+			}
+		fp.close();
+	} catch (FileNotFoundException e) {
+		System.out.println("Fichier non trouvé");
+	} catch (IOException e) {
+		System.out.println("Erreur de lecture");
+	}
+}
+```
+
+---
+
+## Lecture d'un fichier situé dans le projet
+
+- Les fichiers peuvent être intégrés au projet
+    - Ils doivent être en dehors du dossier `src`
+    - Exemple :
+
+![projet Eclipse](./orgaProjet.png)
+
+- Pour y accéder 
+    - remplacer `new FileReader(new File("c:\\temp\\dansTemp.txt"));` 
+    - par `new FileReader(new File("Fichiers/dansProjet.txt"));`
 
 ---
 

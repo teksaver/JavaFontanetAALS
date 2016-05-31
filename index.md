@@ -516,9 +516,6 @@ public class B extends A{ //A est la super classe de B
 
 ---
 
-
-
-
 ## Que se passe-t-il si B hérite de A et C hérite de B ?
 
 
@@ -776,3 +773,166 @@ Classe Inconnu extends Personne
         super("John","Doe",age)
         this.lieu=lieu;
 ```
+
+--- .title-slide
+
+## Restructuration séance 8
+
+- Les exceptions
+- Les fichiers texte
+
+---
+
+## Les exceptions : est-ce vraiment utile ?
+
+Oui
+
+## Est-ce dangereux, prématuré ?
+
+Non, indispensable
+
+---
+
+## Pourquoi ?
+
+- Evite de mélanger le code "utile" et la gestion des erreurs 
+    - débat ouvert : https://golang.org/doc/faq#exceptions
+- La valeur de retour d'une méthode n'est pas toujours disponible pour indiquer une erreur
+    - exemple extrême : le constructeur n'a pas de valeur de retour !
+- Les classes que vous importez peuvent implémenter des exceptions qu'il faut savoir gérer
+    - par exemple, pour gérer les fichiers...
+
+---
+
+## Exemple du constructeur
+
+
+```java
+public class AgeValide {
+	int age;
+    
+    //Le constructeur n'accepte de créer l'objet que si l'argument est valide
+	public AgeValide(int age) {
+		if (age >=0 && age < 125)
+			this.age = age;
+		else{
+			throw new IllegalArgumentException();
+		}
+	}
+
+```
+
+---
+
+## Doit-on utiliser obligatoirement try..catch ?
+
+
+```java
+	public static void main(String[] args) {
+		AgeValide valide=new AgeValide(20);  // objet créé
+		AgeValide nonvalide=new AgeValide(300); // exception
+		System.out.println("fin du programme");
+    }
+```
+Le programme crashe et affiche :
+
+<code>  Exception in thread "main" java.lang.IllegalArgumentException<br>
+	    at AgeValide.<init>(AgeValide.java:9)<br>
+	    at AgeValide.main(AgeValide.java:15)
+</code>
+
+---
+
+## Avec try..catch 
+
+
+```java
+	public static void main(String[] args) {
+		try{
+			AgeValide valide=new AgeValide(20);
+			AgeValide nonvalide=new AgeValide(300);
+		}catch(Exception e){
+			e.printStackTrace(); //affiche l'exception
+		}
+		System.out.println("sortie du programme");
+}
+```
+<code>java.lang.IllegalArgumentException<br>
+	at AgeValide.<init>(AgeValide.java:9)<br>
+	at AgeValide.main(AgeValide.java:16)<br>
+sortie du programme</code>
+
+---
+
+## Multiples catchs
+
+- Les exceptions sont des *objets* issus d'une hiérarchie dont la racine est *Exception*
+    - Exemple : https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html
+- Lorsqu'une exception est levée, les catch sont analysés dans l'ordre de leur déclaration
+- Un catch est traité si l'objet *appartient* à ou est un *descendant* de la classe Exception en paramètre du catch
+    - Une exception issue de la classe `ArithmeticException` sera donc traitée par `catch(ArithmeticException e)` tout comme par `catch(Exception  e)`
+
+---
+
+## InputStream/OutputStream
+ 
+ - Ecriture / lecture sous forme binaire
+ - Utile pour la sérialisation (voir questions diverses)
+ - Principe à connaître, mais pas son application
+ - Nous allons nous intéresser aux fichiers *texte*
+
+---
+
+## Lecture/Ecriture d'un fichier en dehors du projet
+
+
+```java
+public static void main(String[] args) {
+	try {
+		//ouverture du fichier avec un chemin absolu
+		FileReader fp=new FileReader(new File("c:\\temp\\dansTemp.txt"));
+		//lecture ligne par ligne dans un buffer
+		String ligne;
+		BufferedReader br = new BufferedReader(fp);
+		while((ligne=br.readLine())!=null){
+			System.out.println(ligne);
+			}
+		fp.close();
+	} catch (FileNotFoundException e) {
+		System.out.println("Fichier non trouvé");
+	} catch (IOException e) {
+		System.out.println("Erreur de lecture");
+	}
+}
+```
+
+---
+
+## Lecture d'un fichier situé dans le projet
+
+- Les fichiers peuvent être intégrés au projet
+    - Ils doivent être en dehors du dossier `src`
+    - Exemple :
+
+![projet Eclipse](./orgaProjet.png)
+
+- Pour y accéder 
+    - remplacer `new FileReader(new File("c:\\temp\\dansTemp.txt"));` 
+    - par `new FileReader(new File("Fichiers/dansProjet.txt"));`
+
+---
+
+## Questions diverses
+
+- Sérialisation
+    - Objectif d'apprentissage à connaitre, pas à appliquer
+    - Permet de sauvegarder l'état d'un objet et de le "transporter"
+    - Transient : indique les éléments à ne *pas* sérialiser
+    
+- Travail sur fichiers "tableurs"
+    - Excel : https://poi.apache.org/
+    - CSV :http://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
+    - Langage (non JAVA) adapté à l'exploration de données : https://www.r-project.org/
+    
+- Pourquoi on ajoute les `java.io.File`, `java.io.FileInputStream`, `java.io.FileOutputSteam`, `java.io.IOException`, ...
+    - Ces classes sont définies en dehors de `java.lang`, ils faut donc les importer
