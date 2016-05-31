@@ -1146,15 +1146,22 @@ while (entrees.hasNext()) {
   <article data-timings="">
     <p>Oui</p>
 
-<h2>Est-ce dangereux, prématuré ?</h2>
-
-<p>Non, indispensable</p>
-
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-47" style="background:;">
+  <hgroup>
+    <h2>Est-ce dangereux, prématuré ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Non, indispensable</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>Pourquoi ?</h2>
   </hgroup>
@@ -1181,7 +1188,7 @@ while (entrees.hasNext()) {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-48" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>Exemple du constructeur</h2>
   </hgroup>
@@ -1204,7 +1211,7 @@ while (entrees.hasNext()) {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-49" style="background:;">
+<slide class="" id="slide-50" style="background:;">
   <hgroup>
     <h2>Doit-on utiliser obligatoirement try..catch ?</h2>
   </hgroup>
@@ -1227,7 +1234,7 @@ while (entrees.hasNext()) {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-50" style="background:;">
+<slide class="" id="slide-51" style="background:;">
   <hgroup>
     <h2>Avec try..catch</h2>
   </hgroup>
@@ -1252,7 +1259,7 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-51" style="background:;">
+<slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>Multiples catchs</h2>
   </hgroup>
@@ -1261,10 +1268,10 @@ sortie du programme</code></p>
 <li>Les exceptions sont des <em>objets</em> issus d&#39;une hiérarchie dont la racine est <em>Exception</em>
 
 <ul>
-<li>Exemple : <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html">https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html</a></li>
+<li>Ex: <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html">https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html</a></li>
 </ul></li>
-<li>Lorsqu&#39;une exception est levée, les catch sont analysés dans l&#39;ordre de leur déclaration</li>
-<li>Un catch est traité si l&#39;objet <em>appartient</em> à ou est un <em>descendant</em> de la classe Exception en paramètre du catch
+<li>Lorsqu&#39;une exception est levée, les <code>catch</code> sont analysés dans l&#39;ordre de leur déclaration</li>
+<li>Un <code>catch</code> est traité si l&#39;objet <em>appartient</em> à ou est un <em>descendant</em> de la classe Exception en paramètre du <code>catch</code>
 
 <ul>
 <li>Une exception issue de la classe <code>ArithmeticException</code> sera donc traitée par <code>catch(ArithmeticException e)</code> tout comme par <code>catch(Exception  e)</code></li>
@@ -1275,7 +1282,7 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-52" style="background:;">
+<slide class="" id="slide-53" style="background:;">
   <hgroup>
     <h2>InputStream/OutputStream</h2>
   </hgroup>
@@ -1291,7 +1298,7 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-53" style="background:;">
+<slide class="" id="slide-54" style="background:;">
   <hgroup>
     <h2>Lecture/Ecriture d&#39;un fichier en dehors du projet</h2>
   </hgroup>
@@ -1305,7 +1312,7 @@ sortie du programme</code></p>
         BufferedReader br = new BufferedReader(fp);
         while((ligne=br.readLine())!=null){
             System.out.println(ligne);
-            }
+        }
         fp.close();
     } catch (FileNotFoundException e) {
         System.out.println(&quot;Fichier non trouvé&quot;);
@@ -1319,24 +1326,19 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-54" style="background:;">
+<slide class="" id="slide-55" style="background:;">
   <hgroup>
     <h2>Lecture d&#39;un fichier situé dans le projet</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Les fichiers peuvent être intégrés au projet
+<li><p>Les fichiers peuvent être intégrés au projet</p>
 
 <ul>
 <li>Ils doivent être en dehors du dossier <code>src</code></li>
-<li>Exemple :</li>
+<li><img src="./orgaProjet.png" alt="projet Eclipse"></li>
 </ul></li>
-</ul>
-
-<p><img src="./orgaProjet.png" alt="projet Eclipse"></p>
-
-<ul>
-<li>Pour y accéder 
+<li><p>Pour y accéder :</p>
 
 <ul>
 <li>remplacer <code>new FileReader(new File(&quot;c:\\temp\\dansTemp.txt&quot;));</code> </li>
@@ -1348,7 +1350,7 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-55" style="background:;">
+<slide class="" id="slide-56" style="background:;">
   <hgroup>
     <h2>Questions diverses</h2>
   </hgroup>
@@ -1661,56 +1663,62 @@ sortie du programme</code></p>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='Pourquoi ?'>
+        data-slide=47 title='Est-ce dangereux, prématuré ?'>
          47
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='Exemple du constructeur'>
+        data-slide=48 title='Pourquoi ?'>
          48
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='Doit-on utiliser obligatoirement try..catch ?'>
+        data-slide=49 title='Exemple du constructeur'>
          49
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=50 title='Avec try..catch'>
+        data-slide=50 title='Doit-on utiliser obligatoirement try..catch ?'>
          50
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=51 title='Multiples catchs'>
+        data-slide=51 title='Avec try..catch'>
          51
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=52 title='InputStream/OutputStream'>
+        data-slide=52 title='Multiples catchs'>
          52
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=53 title='Lecture/Ecriture d&#39;un fichier en dehors du projet'>
+        data-slide=53 title='InputStream/OutputStream'>
          53
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=54 title='Lecture d&#39;un fichier situé dans le projet'>
+        data-slide=54 title='Lecture/Ecriture d&#39;un fichier en dehors du projet'>
          54
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=55 title='Questions diverses'>
+        data-slide=55 title='Lecture d&#39;un fichier situé dans le projet'>
          55
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=56 title='Questions diverses'>
+         56
       </a>
     </li>
   </ul>

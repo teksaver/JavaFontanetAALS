@@ -787,6 +787,8 @@ Classe Inconnu extends Personne
 
 Oui
 
+---
+
 ## Est-ce dangereux, prématuré ?
 
 Non, indispensable
@@ -867,9 +869,9 @@ sortie du programme</code>
 ## Multiples catchs
 
 - Les exceptions sont des *objets* issus d'une hiérarchie dont la racine est *Exception*
-    - Exemple : https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html
-- Lorsqu'une exception est levée, les catch sont analysés dans l'ordre de leur déclaration
-- Un catch est traité si l'objet *appartient* à ou est un *descendant* de la classe Exception en paramètre du catch
+    - Ex: https://docs.oracle.com/javase/8/docs/api/java/lang/IllegalArgumentException.html
+- Lorsqu'une exception est levée, les `catch` sont analysés dans l'ordre de leur déclaration
+- Un `catch` est traité si l'objet *appartient* à ou est un *descendant* de la classe Exception en paramètre du `catch`
     - Une exception issue de la classe `ArithmeticException` sera donc traitée par `catch(ArithmeticException e)` tout comme par `catch(Exception  e)`
 
 ---
@@ -896,7 +898,7 @@ public static void main(String[] args) {
 		BufferedReader br = new BufferedReader(fp);
 		while((ligne=br.readLine())!=null){
 			System.out.println(ligne);
-			}
+		}
 		fp.close();
 	} catch (FileNotFoundException e) {
 		System.out.println("Fichier non trouvé");
@@ -912,11 +914,9 @@ public static void main(String[] args) {
 
 - Les fichiers peuvent être intégrés au projet
     - Ils doivent être en dehors du dossier `src`
-    - Exemple :
+    - ![projet Eclipse](./orgaProjet.png)
 
-![projet Eclipse](./orgaProjet.png)
-
-- Pour y accéder 
+- Pour y accéder :
     - remplacer `new FileReader(new File("c:\\temp\\dansTemp.txt"));` 
     - par `new FileReader(new File("Fichiers/dansProjet.txt"));`
 
