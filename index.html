@@ -1381,6 +1381,162 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="title-slide" id="slide-57" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 9</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les interfaces graphiques</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-58" style="background:;">
+  <hgroup>
+    <h2>Retour sur...</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les associations ?</li>
+<li>L&#39;héritage ?</li>
+<li>Les exceptions ?</li>
+<li>Les fichiers ?</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-59" style="background:;">
+  <hgroup>
+    <h2>Ecriture d&#39;un nombre dans un fichier texte</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Un fichier texte attend.. du texte</li>
+<li>La méthode <code>write</code> est surchargée pour
+
+<ul>
+<li>une chaîne <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-java.lang.String-">https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-java.lang.String-</a></li>
+<li><em>un</em> caractère <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-int-">https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-int-</a>
+
+<ul>
+<li>Un entier passé en paramètre est donc converti en fonction du code ASCII</li>
+</ul></li>
+</ul></li>
+<li>Pour écrire un nombre, il faut le convertir en chaîne avec la méthode toString()
+
+<ul>
+<li><code>wr.write(new Integer(123).toString());</code></li>
+<li>ou <code>wr.write(String.valueOf(123));</code></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-60" style="background:;">
+  <hgroup>
+    <h2>JDialog ou JFrame</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Un <code>JFrame</code> est une fenêtre <em>top level</em>
+
+<ul>
+<li>définit un titre et une bordure</li>
+<li>est redimensionnable (ou fixé, selon la configuration)</li>
+<li>contient les éléments de type panel et composants.</li>
+<li><a href="https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html">https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html</a></li>
+</ul></li>
+<li>Un <code>JDialog</code> est une <em>sous-fenêtre</em> indépendante
+
+<ul>
+<li>est un élément modal (bloque l&#39;utilisation de la fenêtre parente)</li>
+<li>est généralement utilisé pour présenter un choix, une erreur ou un avertissement</li>
+<li>contient le message et les boutons d&#39;action</li>
+<li><a href="https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html">https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html</a></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-61" style="background:;">
+  <hgroup>
+    <h2>Les layouts</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>A maîtriser
+
+<ul>
+<li>Flowlayout : <a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html">https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html</a></li>
+<li>BorderLayout : <a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/border.html">https://docs.oracle.com/javase/tutorial/uiswing/layout/border.html</a></li>
+</ul></li>
+<li>A savoir expliquer
+
+<ul>
+<li>GridBagLayout : <a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html">https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html</a></li>
+<li>CardLayout : <a href="https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html">https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html</a></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-62" style="background:;">
+  <hgroup>
+    <h2>Déclaration d&#39;objets et références</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>La classe <code>Fenetre</code> <em>hérite</em> de la classe <code>JFrame</code></li>
+<li><code>this</code> permet donc d&#39;accéder aux méthodes de la classe parente</li>
+<li>L&#39;allocation mémoire dès la déclaration est un raccourci, mais il est préférable d&#39;utiliser un constructeur</li>
+</ul>
+
+<pre><code class="java">public class Fenetre extends JFrame{
+    CardLayout cl = new CardLayout();
+    JPanel content = new JPanel();
+    //Liste des noms de nos conteneurs pour la pile de cartes
+    String[] listContent = {&quot;CARD_1&quot;, &quot;CARD_2&quot;, &quot;CARD_3&quot;};
+    int indice = 0;
+    public Fenetre(){   
+        this.setTitle(&quot;CardLayout&quot;);
+        this.setSize(300, 120);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-63" style="background:;">
+  <hgroup>
+    <h2>Questions diverses</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Définir un code de sortie pour indiquer la bonne exécution du programme
+
+<ul>
+<li>Programme console : <code>System.exit(code)</code></li>
+<li>Programme SWING : Définir la méthode de sortie <code>this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</code> <a href="https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html#windowevents">https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html#windowevents</a> </li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -1719,6 +1875,48 @@ sortie du programme</code></p>
       <a href="#" target="_self" rel='tooltip' 
         data-slide=56 title='Questions diverses'>
          56
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=57 title='Restructuration séance 9'>
+         57
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=58 title='Retour sur...'>
+         58
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=59 title='Ecriture d&#39;un nombre dans un fichier texte'>
+         59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='JDialog ou JFrame'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='Les layouts'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='Déclaration d&#39;objets et références'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='Questions diverses'>
+         63
       </a>
     </li>
   </ul>

@@ -936,3 +936,91 @@ public static void main(String[] args) {
     
 - Pourquoi on ajoute les `java.io.File`, `java.io.FileInputStream`, `java.io.FileOutputSteam`, `java.io.IOException`, ...
     - Ces classes sont définies en dehors de `java.lang`, ils faut donc les importer
+
+--- .title-slide
+
+## Restructuration séance 9
+
+- Les interfaces graphiques
+
+---
+
+## Retour sur...
+
+- Les associations ?
+- L'héritage ?
+- Les exceptions ?
+- Les fichiers ?
+
+
+---
+
+## Ecriture d'un nombre dans un fichier texte
+
+- Un fichier texte attend.. du texte
+- La méthode `write` est surchargée pour
+    - une chaîne https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-java.lang.String-
+    - *un* caractère https://docs.oracle.com/javase/8/docs/api/java/io/Writer.html#write-int-
+        - Un entier passé en paramètre est donc converti en fonction du code ASCII
+- Pour écrire un nombre, il faut le convertir en chaîne avec la méthode toString()
+    - `wr.write(new Integer(123).toString());`
+    - ou `wr.write(String.valueOf(123));`
+
+---
+
+## JDialog ou JFrame
+
+- Un `JFrame` est une fenêtre *top level*
+    - définit un titre et une bordure
+    - est redimensionnable (ou fixé, selon la configuration)
+    - contient les éléments de type panel et composants.
+    - https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html
+- Un `JDialog` est une *sous-fenêtre* indépendante
+    - est un élément modal (bloque l'utilisation de la fenêtre parente)
+    - est généralement utilisé pour présenter un choix, une erreur ou un avertissement
+    - contient le message et les boutons d'action
+    - https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+
+---
+
+## Les layouts
+
+- A maîtriser
+    - Flowlayout : https://docs.oracle.com/javase/tutorial/uiswing/layout/flow.html
+    - BorderLayout : https://docs.oracle.com/javase/tutorial/uiswing/layout/border.html
+- A savoir expliquer
+    - GridBagLayout : https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
+    - CardLayout : https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
+
+---
+
+## Déclaration d'objets et références
+
+- La classe `Fenetre` *hérite* de la classe `JFrame`
+- `this` permet donc d'accéder aux méthodes de la classe parente
+- L'allocation mémoire dès la déclaration est un raccourci, mais il est préférable d'utiliser un constructeur
+
+
+```java
+public class Fenetre extends JFrame{
+    CardLayout cl = new CardLayout();
+    JPanel content = new JPanel();
+    //Liste des noms de nos conteneurs pour la pile de cartes
+    String[] listContent = {"CARD_1", "CARD_2", "CARD_3"};
+    int indice = 0;
+    public Fenetre(){   
+        this.setTitle("CardLayout");
+        this.setSize(300, 120);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ...
+```
+
+---
+
+## Questions diverses
+
+- Définir un code de sortie pour indiquer la bonne exécution du programme
+    - Programme console : `System.exit(code)`
+    - Programme SWING : Définir la méthode de sortie `this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);` https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html#windowevents 
+    
+    
