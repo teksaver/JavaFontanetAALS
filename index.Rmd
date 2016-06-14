@@ -981,8 +981,8 @@ public class Fenetre extends JFrame{
 - Définir un code de sortie pour indiquer la bonne exécution du programme
     - Programme console : `System.exit(code)`
     - Programme SWING : Définir la méthode de sortie `this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);` https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html#windowevents 
-    
-    
+
+
 --- .title-slide
 
 ## Restructuration séance 10
@@ -1031,6 +1031,50 @@ try(FileWriter fw = new FileWriter("outfilename", true);
     //...
 }
 ```
+https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html#FileWriter-java.io.File-boolean-
+
+--- 
+
+## Classes internes et anonymes
+
+- Les événéments peuvent être gérés en implémentant l'interface ou par une *classe interne*
+
+```{java}
+//An example of using an inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MyAdapter());
+    ...
+    class MyAdapter extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            ...//Event listener implementation goes here...
+        }
+    }
+}
+```
+
+---
+
+--- 
+
+## Classes internes et anonymes
+
+- Une classe anonyme permet d'instancier directement un objet sans créer la classe
+```{java}
+//An example of using an anonymous inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                ...//Event listener implementation goes here...
+            }
+        });
+    ...
+    }
+}
+```
+
+Source : https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html#innerClasses
 
 ## Questions diverses
 
