@@ -1022,5 +1022,111 @@ public class Fenetre extends JFrame{
 - Définir un code de sortie pour indiquer la bonne exécution du programme
     - Programme console : `System.exit(code)`
     - Programme SWING : Définir la méthode de sortie `this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);` https://docs.oracle.com/javase/tutorial/uiswing/components/frame.html#windowevents 
+
+
+--- .title-slide
+
+## Restructuration séance 10
+
+- Les événements
+- retours : fichiers, héritage, positionnement
+
+---
+
+## Suppression des bordures entre JPanel
+
+- Dans un `BorderLayout` ou un `FlowLayout`
+    - Utiliser setVGap
+        - https://docs.oracle.com/javase/8/docs/api/java/awt/BorderLayout.html#setVgap-int-
+        - https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#setVgap-int-
+    - Fixer les espaces à l'initialisation du `JPanel`
+        - https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#FlowLayout-int-int-int-
+        - ex : new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+---
+
+## héritage : quand utiliser `this()` plutôt que `super()`
+
+
+```java
+public class MaFenetre extends JFrame{
+    public MaFenetre(){
+        super.setTitle("Calculette"); // on peut utiliser this : l'objet courant hérite de JFrame
+        this.setSize(400,500);
+    }
+}
+```
+
+---
+
+## Export dans un fichier sans écraser
     
+- Le fichier doit être ouvert en mode *append*
+
+
+```java
+try(FileWriter fw = new FileWriter("outfilename", true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    PrintWriter out = new PrintWriter(bw))
+{
+    out.println("texte ajouté");
+} catch (IOException e) {
+    //...
+}
+```
+https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html#FileWriter-java.io.File-boolean-
+
+--- 
+
+## Classes internes et anonymes
+
+- Les événéments peuvent être gérés en implémentant l'interface ou par une *classe interne*
+
+
+```java
+//An example of using an inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MyAdapter());
+    ...
+    class MyAdapter extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            ...//Event listener implementation goes here...
+        }
+    }
+}
+```
+
+---
+
+## Classes internes et anonymes
+
+- Une classe anonyme permet d'instancier directement un objet sans créer la classe
+
+```java
+//An example of using an anonymous inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                ...//Event listener implementation goes here...
+            }
+        });
+    ...
+    }
+}
+```
+
+Source : https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html#innerClasses
+
+---
+
+## Questions diverses
+
+- Que fait la méthode `go()` page 300 ?
+    - Méthode définie dans le livret dans une partie "fil rouge". Dessine une forme sur le panel.
     
+- Pourquoi relâcher le bouton en dehors de la zone pose problème ?
+
+- Qu'est-ce qu'une pile ?
+    - principe du LIFO : "Last In First Out"

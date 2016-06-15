@@ -988,7 +988,7 @@ public class Fenetre extends JFrame{
 ## Restructuration séance 10
 
 - Les événements
-- retour sur les fichiers
+- retours : fichiers, héritage, positionnement
 
 ---
 
@@ -1055,8 +1055,6 @@ public class MyClass extends Applet {
 
 ---
 
---- 
-
 ## Classes internes et anonymes
 
 - Une classe anonyme permet d'instancier directement un objet sans créer la classe
@@ -1076,7 +1074,14 @@ public class MyClass extends Applet {
 
 Source : https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html#innerClasses
 
+---
+
 ## Questions diverses
 
 - Que fait la méthode `go()` page 300 ?
     - Méthode définie dans le livret dans une partie "fil rouge". Dessine une forme sur le panel.
+    
+- Pourquoi relâcher le bouton en dehors de la zone pose problème ?
+
+- Qu'est-ce qu'une pile ?
+    - principe du LIFO : "Last In First Out"

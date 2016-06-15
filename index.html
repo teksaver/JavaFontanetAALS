@@ -1537,6 +1537,167 @@ sortie du programme</code></p>
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="title-slide" id="slide-64" style="background:;">
+  <hgroup>
+    <h2>Restructuration séance 10</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les événements</li>
+<li>retours : fichiers, héritage, positionnement</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-65" style="background:;">
+  <hgroup>
+    <h2>Suppression des bordures entre JPanel</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Dans un <code>BorderLayout</code> ou un <code>FlowLayout</code>
+
+<ul>
+<li>Utiliser setVGap
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/BorderLayout.html#setVgap-int-">https://docs.oracle.com/javase/8/docs/api/java/awt/BorderLayout.html#setVgap-int-</a></li>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#setVgap-int-">https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#setVgap-int-</a></li>
+</ul></li>
+<li>Fixer les espaces à l&#39;initialisation du <code>JPanel</code>
+
+<ul>
+<li><a href="https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#FlowLayout-int-int-int-">https://docs.oracle.com/javase/8/docs/api/java/awt/FlowLayout.html#FlowLayout-int-int-int-</a></li>
+<li>ex : new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));</li>
+</ul></li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-66" style="background:;">
+  <hgroup>
+    <h2>héritage : quand utiliser <code>this()</code> plutôt que <code>super()</code></h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="java">public class MaFenetre extends JFrame{
+    public MaFenetre(){
+        super.setTitle(&quot;Calculette&quot;); // on peut utiliser this : l&#39;objet courant hérite de JFrame
+        this.setSize(400,500);
+    }
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-67" style="background:;">
+  <hgroup>
+    <h2>Export dans un fichier sans écraser</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Le fichier doit être ouvert en mode <em>append</em></li>
+</ul>
+
+<pre><code class="java">try(FileWriter fw = new FileWriter(&quot;outfilename&quot;, true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    PrintWriter out = new PrintWriter(bw))
+{
+    out.println(&quot;texte ajouté&quot;);
+} catch (IOException e) {
+    //...
+}
+</code></pre>
+
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html#FileWriter-java.io.File-boolean-">https://docs.oracle.com/javase/8/docs/api/java/io/FileWriter.html#FileWriter-java.io.File-boolean-</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-68" style="background:;">
+  <hgroup>
+    <h2>Classes internes et anonymes</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Les événéments peuvent être gérés en implémentant l&#39;interface ou par une <em>classe interne</em></li>
+</ul>
+
+<pre><code class="java">//An example of using an inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MyAdapter());
+    ...
+    class MyAdapter extends MouseAdapter {
+        public void mouseClicked(MouseEvent e) {
+            ...//Event listener implementation goes here...
+        }
+    }
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-69" style="background:;">
+  <hgroup>
+    <h2>Classes internes et anonymes</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Une classe anonyme permet d&#39;instancier directement un objet sans créer la classe</li>
+</ul>
+
+<pre><code class="java">//An example of using an anonymous inner class.
+public class MyClass extends Applet {
+    ...
+        someObject.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                ...//Event listener implementation goes here...
+            }
+        });
+    ...
+    }
+}
+</code></pre>
+
+<p>Source : <a href="https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html#innerClasses">https://docs.oracle.com/javase/tutorial/uiswing/events/generalrules.html#innerClasses</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-70" style="background:;">
+  <hgroup>
+    <h2>Questions diverses</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Que fait la méthode <code>go()</code> page 300 ?</p>
+
+<ul>
+<li>Méthode définie dans le livret dans une partie &quot;fil rouge&quot;. Dessine une forme sur le panel.</li>
+</ul></li>
+<li><p>Pourquoi relâcher le bouton en dehors de la zone pose problème ?</p></li>
+<li><p>Qu&#39;est-ce qu&#39;une pile ?</p>
+
+<ul>
+<li>principe du LIFO : &quot;Last In First Out&quot;</li>
+</ul></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
@@ -1917,6 +2078,48 @@ sortie du programme</code></p>
       <a href="#" target="_self" rel='tooltip' 
         data-slide=63 title='Questions diverses'>
          63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='Restructuration séance 10'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='Suppression des bordures entre JPanel'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='héritage : quand utiliser <code>this()</code> plutôt que <code>super()</code>'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='Export dans un fichier sans écraser'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='Classes internes et anonymes'>
+         68
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=69 title='Classes internes et anonymes'>
+         69
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=70 title='Questions diverses'>
+         70
       </a>
     </li>
   </ul>
